@@ -37,7 +37,7 @@ sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generat
 sed -i 's/ssid=OpenWrt/ssid=iMei/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # 修改默认wifi密码key为12345678
-#sed -i 's/key=password/key=12345678/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i 's/key=password/key=12345678/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 sed -i '/msgid "Hostnames"/{n;s/主机名/主机映射/;}' feeds/luci/modules/luci-base/po/zh-cn/base.po
 
@@ -66,7 +66,8 @@ sed -i '48,51d' package/default-settings/files/zzz-default-settings
 date=`date +%m.%d.%Y`
 sed -i "s/DISTRIB_DESCRIPTION.*/DISTRIB_DESCRIPTION='%D %V %C'/g" package/base-files/files/etc/openwrt_release
 sed -i "s/# REVISION:=x/REVISION:= $date/g" include/version.mk
-#sed -i "s/'OpenWrt SNAPSHOT '/'OpenWrt SNAPSHOT $date Build By imei '/g" package/default-settings/files/zzz-default-settings
+# 修改主机名字，把YOU-R4A修改你喜欢的就行（不能纯数字或者使用中文）
+sed -i '/uci commit system/i\uci set system.@system[0].hostname='K2P-imei'' package/lean/default-settings/files/zzz-default-settings
 
 sed -i 's/msgstr "Socat"/msgstr "端口转发"/g' feeds/lienol/luci-app-socat/po/zh-cn/socat.po
 
