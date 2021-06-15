@@ -11,14 +11,14 @@ name: Openwrt-AutoBuild-Lean
 on: 
   repository_dispatch:
   release:
-    types: published
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/Openwrt-AutoBuild-Lean.yml'
-  schedule:
-    - cron: 0 20 * * *
+#    types: published
+#  push:
+#    branches:
+#      - main
+#    paths:
+#      - '.github/workflows/Openwrt-AutoBuild-Lean.yml'
+#  schedule:
+#    - cron: 0 20 * * *
   #watch:
   #  types: started
 
