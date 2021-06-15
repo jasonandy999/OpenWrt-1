@@ -31,7 +31,13 @@ svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-eqos package/o
 #sed -i "s/LUCI_DEPENDS:=.*/LUCI_DEPENDS:=+ca-certs +curl +wget +PACKAGE_$(PKG_NAME)_INCLUDE_binary:AdGuardHome/g" package/openwrt-packages/luci-app-adguardhome/Makefile
 
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+
+# 修改默认wifi名称ssid为iMei
+sed -i 's/ssid=OpenWrt/ssid=iMei/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+
+# 修改默认wifi密码key为12345678
+#sed -i 's/key=password/key=12345678/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 sed -i '/msgid "Hostnames"/{n;s/主机名/主机映射/;}' feeds/luci/modules/luci-base/po/zh-cn/base.po
 
@@ -58,9 +64,9 @@ sed -i 's/Lienol"/Master"/g' feeds/luci/luci.mk
 
 sed -i '48,51d' package/default-settings/files/zzz-default-settings
 date=`date +%m.%d.%Y`
-sed -i "s/DISTRIB_DESCRIPTION.*/DISTRIB_DESCRIPTION='%D %V %C Build By ViS0N'/g" package/base-files/files/etc/openwrt_release
+sed -i "s/DISTRIB_DESCRIPTION.*/DISTRIB_DESCRIPTION='%D %V %C'/g" package/base-files/files/etc/openwrt_release
 sed -i "s/# REVISION:=x/REVISION:= $date/g" include/version.mk
-#sed -i "s/'OpenWrt SNAPSHOT '/'OpenWrt SNAPSHOT $date Build By VIS0N '/g" package/default-settings/files/zzz-default-settings
+#sed -i "s/'OpenWrt SNAPSHOT '/'OpenWrt SNAPSHOT $date Build By imei '/g" package/default-settings/files/zzz-default-settings
 
 sed -i 's/msgstr "Socat"/msgstr "端口转发"/g' feeds/lienol/luci-app-socat/po/zh-cn/socat.po
 
